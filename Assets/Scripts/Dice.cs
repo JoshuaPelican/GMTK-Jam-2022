@@ -13,19 +13,24 @@ public class Dice : MonoBehaviour
     int value = 1;
     float speed;
 
+    [SerializeField] FloatVariable PlayerStreak;
+    [SerializeField] FloatVariable StreakMultiplier;
+
     public void StartDice(float _speed)
     {
         active = true;
-        speed = _speed;
+        speed = _speed * PlayerStreak.Value;
 
-        Invoke(nameof(NextValue), speed);
+        Invoke(nameof(NextValue), 1 / speed);
     }
 
     public int StopDice()
     {
         active = false;
 
-        Debug.Log("Dice rolled: " + value);
+        ApplyStreak();
+
+        //Debug.Log("Dice rolled: " + value);
         return value;
     }
 
@@ -39,6 +44,13 @@ public class Dice : MonoBehaviour
         value = diceSequence[sequenceIndex];
         valueTextMesh.SetText(value.ToString());
 
-        Invoke(nameof(NextValue), speed);
+        Invoke(nameof(NextValue), 1 / speed);
+    }
+
+    void ApplyStreak()
+    {
+        float streakPercent = (value / 6f) + 0.5f;
+        PlayerStreak.Value *= streakPercent * StreakMultiplier.Value;
+        PlayerStreak.Value = Mathf.Clamp(PlayerStreak.Value, 1, float.MaxValue);
     }
 }

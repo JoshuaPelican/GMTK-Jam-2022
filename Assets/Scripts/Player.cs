@@ -1,22 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-
     [SerializeField] DiceRoller DiceRollerPrefab;
-
     [SerializeField] Weapon equippedWeapon;
 
-    float streak;
+    [SerializeField] Image image;
 
+    [SerializeField] FloatVariable Streak;
 
     public void UseWeapon()
     {
-        Instantiate(DiceRollerPrefab, transform.parent).SetNumberOfDice(equippedWeapon.NumberOfDice);
+        DiceRoller newRoller = Instantiate(DiceRollerPrefab, GameObject.FindWithTag("Canvas").transform).GetComponent<DiceRoller>();
+        newRoller.SetNumberOfDice(equippedWeapon.NumberOfDice);
+        newRoller.OnRollerFinished.AddListener(Attack);
     }
 
-    public void AddSreak(float value)
+    void Attack(int value)
     {
-        streak += value;
+        Debug.Log("Player Attacks For: " + value);
     }
 }

@@ -228,3 +228,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueTextMesh: {fileID: 7808504454938519665}
+  PlayerStreak: {fileID: 11400000, guid: a96606462397a5b439177618f6bf2a9e, type: 2}
+  StreakMultiplier: {fileID: 11400000, guid: 30c8fe5bafb4aa3419f05f6b276c8a9e, type: 2}

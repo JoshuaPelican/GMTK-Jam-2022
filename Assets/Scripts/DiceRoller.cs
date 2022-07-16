@@ -28,7 +28,7 @@ public class DiceRoller : MonoBehaviour
             diceInPlay[i] = newDice;
         }
 
-        diceInPlay[currentDiceIndex].StartDice(0.25f);
+        diceInPlay[currentDiceIndex].StartDice(1f);
     }
 
     private void Update()
@@ -49,9 +49,11 @@ public class DiceRoller : MonoBehaviour
 
     public void StopCurrentDice()
     {
+        //Dice roll
         int roll = diceInPlay[currentDiceIndex].StopDice();
-        OnDiceRolled?.Invoke(currentDiceIndex + 1, roll);
         totalDiceValue += roll;
+
+        OnDiceRolled?.Invoke(currentDiceIndex + 1, roll);
 
         currentDiceIndex++;
 
@@ -61,7 +63,7 @@ public class DiceRoller : MonoBehaviour
             return;
         }
 
-        diceInPlay[currentDiceIndex]?.StartDice(0.25f);
+        diceInPlay[currentDiceIndex].StartDice(1f);
     }
 
     void RollerFinished()
