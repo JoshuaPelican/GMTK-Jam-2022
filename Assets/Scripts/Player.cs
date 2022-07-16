@@ -1,24 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    [SerializeField] DiceRoller DiceRollerPrefab;
-    [SerializeField] Weapon equippedWeapon;
-
-    [SerializeField] Image image;
-
-    [SerializeField] FloatVariable Streak;
+    [SerializeField] Weapon EquippedWeapon;
 
     public void UseWeapon()
     {
-        DiceRoller newRoller = Instantiate(DiceRollerPrefab, GameObject.FindWithTag("Canvas").transform).GetComponent<DiceRoller>();
-        newRoller.SetNumberOfDice(equippedWeapon.NumberOfDice);
-        newRoller.OnRollerFinished.AddListener(Attack);
+        //If player has no targets, find first available
+        if(!target) SetTarget(FindObjectOfType<EnemyBase>());
+
+        UseAttack(EquippedWeapon.NumberOfDice, RollerPoint);
     }
 
-    void Attack(int value)
+    protected override void Die()
     {
-        Debug.Log("Player Attacks For: " + value);
+        Debug.Log("Player is Dead!");
     }
 }
