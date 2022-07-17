@@ -9,7 +9,7 @@ public class EnemyBase : Entity
     [SerializeField] float rollCooldown = 0.25f;
     float t;
 
-    [SerializeField] private Transform damagePopup;
+    [SerializeField] private Transform damagePopup, heavyDmgPopup;
 
     private void Awake()
     {
@@ -63,7 +63,13 @@ public class EnemyBase : Entity
         {
             DamageTextPopup(damage);
         }
+
+        //find player equped weapon.numdice = int num dice
+        //if(damage >= num dice * 5){HeavyDamageTextPopup} 
     }
+
+
+
 
     public void DamageTextPopup(int damage)
     {

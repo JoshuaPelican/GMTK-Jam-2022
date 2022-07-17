@@ -298,6 +298,8 @@ MonoBehaviour:
   Enemy: {fileID: 11400000, guid: 9d0813b10e3ab4a42ba90034b6ac12c2, type: 2}
   RollFrequency: 0.03
   rollCooldown: 0.5
+  damagePopup: {fileID: 6781898537843032003, guid: 435d61119818d2e41b3dfb1799bb964a, type: 3}
+  heavyDmgPopup: {fileID: 9205545878923121334, guid: 3b7acf01b2ee64b419d62a9819a36aa2, type: 3}
 --- !u!1 &7176848152792346622
 GameObject:
   m_ObjectHideFlags: 0

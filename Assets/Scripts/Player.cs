@@ -35,7 +35,10 @@ public class Player : Entity
         //If player has no targets, find first available
         if(!target) SetTarget(FindObjectOfType<EnemyBase>());
 
-         roller = UseAttack(EquippedWeapon.NumberOfDice);
+        roller = UseAttack(EquippedWeapon.NumberOfDice);
+
+        // Plays Sword Swing Anim
+        GetComponent<AttackEffects>().isAttacking = true;
     }
 
     protected override void Die()
