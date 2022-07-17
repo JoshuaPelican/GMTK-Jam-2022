@@ -9,6 +9,8 @@ public class EnemyBase : Entity
     [SerializeField] float rollCooldown = 0.25f;
     float t;
 
+    [SerializeField] private Transform damagePopup;
+
     private void Awake()
     {
         SetTarget(GameObject.FindWithTag("Player").GetComponent<Player>());
@@ -56,7 +58,17 @@ public class EnemyBase : Entity
     {
         base.TakeDamage(damage);
 
+        if (damagePopup != null)
+        {
+            DamageTextPopup(damage);
+        }
+    }
 
+    public void DamageTextPopup(int damage)
+    {
+        Transform DamagePopupTransform = Instantiate(damagePopup, transform);
+        DamagePopup _damagePopup = DamagePopupTransform.GetComponent<DamagePopup>();
+        _damagePopup.Setup(damage);
     }
 
     protected override void Die()
