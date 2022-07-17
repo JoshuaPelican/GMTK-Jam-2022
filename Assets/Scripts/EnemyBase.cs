@@ -63,12 +63,10 @@ public class EnemyBase : Entity
         {
             DamageTextPopup(damage);
         }
-
+        
         //find player equped weapon.numdice = int num dice
-        //if(damage >= num dice * 5){HeavyDamageTextPopup} 
+        //if(damage >= num dice * 5){HeavyDamageTextPopup}
     }
-
-
 
 
     public void DamageTextPopup(int damage)
