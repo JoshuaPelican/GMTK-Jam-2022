@@ -13,6 +13,8 @@ public class DiceRoller : MonoBehaviour
     Dice[] diceInPlay;
     int currentDiceIndex;
 
+    FloatVariable streak;
+
     [HideInInspector]
     public UnityEvent<int, int> OnDiceRolled;
     [HideInInspector]
@@ -28,23 +30,21 @@ public class DiceRoller : MonoBehaviour
             diceInPlay[i] = newDice;
         }
 
-        diceInPlay[currentDiceIndex].StartDice(1f);
+        diceInPlay[currentDiceIndex].StartDice(1f, streak);
     }
 
-    private void Update()
+    public void Initialize(int numDice, FloatVariable streak)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        numberOfDice = numDice;
+        this.streak = streak;
+    }
+
+    public int CurrentDiceValue
+    {
+        get
         {
-            if (currentDiceIndex >= diceInPlay.Length)
-                return;
-
-            StopCurrentDice();
+            return diceInPlay[currentDiceIndex].Value;
         }
-    }
-
-    public void SetNumberOfDice(int value)
-    {
-        numberOfDice = value;
     }
 
     public void StopCurrentDice()
@@ -63,12 +63,13 @@ public class DiceRoller : MonoBehaviour
             return;
         }
 
-        diceInPlay[currentDiceIndex].StartDice(1f);
+        diceInPlay[currentDiceIndex].StartDice(1f, streak);
     }
 
     void RollerFinished()
     {
         Debug.Log("Roller Total: " + totalDiceValue);
         OnRollerFinished?.Invoke(totalDiceValue);
+        Destroy(gameObject);
     }
 }

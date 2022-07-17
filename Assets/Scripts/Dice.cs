@@ -11,17 +11,24 @@ public class Dice : MonoBehaviour
     bool active;
     int sequenceIndex = 0;
     int value = 1;
-    float speed;
+    public int Value
+    {
+        get { return value; }
+    }
 
-    [SerializeField] FloatVariable PlayerStreak;
+    float speed;
+    FloatVariable streak;
+
     [SerializeField] FloatVariable StreakMultiplier;
 
-    public void StartDice(float _speed)
+    public void StartDice(float speed, FloatVariable streak)
     {
         active = true;
-        speed = _speed * PlayerStreak.Value;
+        this.streak = streak;
 
-        Invoke(nameof(NextValue), 1 / speed);
+        this.speed = speed * this.streak.Value;
+
+        Invoke(nameof(NextValue), 1 / this.speed);
     }
 
     public int StopDice()
@@ -49,8 +56,8 @@ public class Dice : MonoBehaviour
 
     void ApplyStreak()
     {
-        float streakPercent = (value / 6f) + 0.5f;
-        PlayerStreak.Value *= streakPercent * StreakMultiplier.Value;
-        PlayerStreak.Value = Mathf.Clamp(PlayerStreak.Value, 1, float.MaxValue);
+        float streakPercent = (value / 6f) - 0.5f;
+        streak.Value += streakPercent * StreakMultiplier.Value;
+        streak.Value = Mathf.Clamp(streak.Value, 1, float.MaxValue);
     }
 }

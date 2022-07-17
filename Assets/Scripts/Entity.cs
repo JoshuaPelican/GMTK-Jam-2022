@@ -9,19 +9,30 @@ public abstract class Entity : MonoBehaviour
 
     protected int health;
     protected Entity target;
+    [SerializeField] protected FloatVariable Streak;
 
-    [SerializeField] UnityEvent OnAttackEnded;
+    private void Start()
+    {
+        GameManager.Instance.OnGameState.AddListener(StartTurn);
+
+        Initialize();
+    }
+
+    protected abstract void Initialize();
+
+    protected abstract void StartTurn(GameState gameState);
 
     public void SetTarget(Entity entity)
     {
         target = entity;
     }
 
-    public void UseAttack(int numDice, Transform rollerPoint)
+    public DiceRoller UseAttack(int numDice)
     {
-        DiceRoller newRoller = Instantiate(DiceRollerPrefab, rollerPoint);
-        newRoller.SetNumberOfDice(numDice);
+        DiceRoller newRoller = Instantiate(DiceRollerPrefab, RollerPoint);
+        newRoller.Initialize(numDice, Streak);
         newRoller.OnRollerFinished.AddListener(Attack);
+        return newRoller;
     }
 
     public void TakeDamage(int damage)
@@ -45,9 +56,10 @@ public abstract class Entity : MonoBehaviour
 
         target.TakeDamage(value);
 
-        OnAttackEnded?.Invoke();
+        EndTurn();
     }
 
     protected abstract void Die();
 
+    protected abstract void EndTurn();
 }
