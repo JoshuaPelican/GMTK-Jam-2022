@@ -35,7 +35,7 @@ public abstract class Entity : MonoBehaviour
         return newRoller;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;
 

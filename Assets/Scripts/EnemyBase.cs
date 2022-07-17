@@ -52,6 +52,13 @@ public class EnemyBase : Entity
         }
     }
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+
+    }
+
     protected override void Die()
     {
         Debug.Log("Enemy " + name + " has Died!");
