@@ -7,7 +7,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] DiceRoller DiceRollerPrefab;
     [SerializeField] protected Transform RollerPoint;
 
-    protected int health;
+    [SerializeField] protected FloatVariable health;
     protected Entity target;
     [SerializeField] protected FloatVariable Streak;
 
@@ -37,9 +37,9 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        health -= damage;
+        health.Value -= damage;
 
-        if(health <= 0)
+        if(health.Value <= 0)
         {
             //Die
             Die();

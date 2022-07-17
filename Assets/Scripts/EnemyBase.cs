@@ -14,11 +14,12 @@ public class EnemyBase : Entity
     private void Awake()
     {
         SetTarget(GameObject.FindWithTag("Player").GetComponent<Player>());
+        Streak.Value = 1;
     }
 
     protected override void Initialize()
     {
-        health = Enemy.MaxHealth;
+        health.Value = Enemy.MaxHealth;
     }
 
     protected override void StartTurn(GameState gameState)
@@ -38,18 +39,18 @@ public class EnemyBase : Entity
 
         if(Random.value <= RollFrequency && t >= rollCooldown)
         {
-            float percentStreak = Mathf.Pow(Streak.Value / 10, 1 / Enemy.Difficulty);
-            float percentRandomRoll = 0.25f / Enemy.Difficulty;
+            float percentStreak = (0.5f / Streak.Value) * Enemy.Difficulty;
+            float percentRandomRoll = Mathf.Clamp01(-(0.05f * Enemy.Difficulty) + 0.334f);
 
             if (roller.CurrentDiceValue > 3 && Random.value <= percentStreak) 
             {
                 roller.StopCurrentDice();
-                rollCooldown = 0;
+                t = 0;
             }
             else if(Random.value <= percentRandomRoll)
             {
                 roller.StopCurrentDice();
-                rollCooldown = 0;
+                t = 0;
             }
         }
     }

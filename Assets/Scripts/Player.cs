@@ -19,7 +19,7 @@ public class Player : Entity
 
     protected override void Initialize()
     {
-        health = 100;
+        health.Value = 100;
     }
 
     protected override void StartTurn(GameState gameState)
