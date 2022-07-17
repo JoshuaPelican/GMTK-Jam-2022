@@ -324,10 +324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiceRollerPrefab: {fileID: 5666135714605947096, guid: 7d9c5772ab922b34db2c5055477697ca, type: 3}
   RollerPoint: {fileID: 1686574051}
-  OnAttackEnded:
-    m_PersistentCalls:
-      m_Calls: []
+  Streak: {fileID: 0}
   Enemy: {fileID: 11400000, guid: 9d0813b10e3ab4a42ba90034b6ac12c2, type: 2}
+  RollFrequency: 0.01
+  rollCooldown: 0.25
+  damagePopup: {fileID: 6781898537843032003, guid: 435d61119818d2e41b3dfb1799bb964a, type: 3}
 --- !u!1 &152530252
 GameObject:
   m_ObjectHideFlags: 0
@@ -4208,7 +4209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3726740952248020482, guid: 5fbfbee0f9885764383291c4c5e18668, type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 3726740952248020482, guid: 5fbfbee0f9885764383291c4c5e18668, type: 3}
       propertyPath: m_LocalScale.x
@@ -4749,9 +4750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiceRollerPrefab: {fileID: 5666135714605947096, guid: 7d9c5772ab922b34db2c5055477697ca, type: 3}
   RollerPoint: {fileID: 1126668363}
-  OnAttackEnded:
-    m_PersistentCalls:
-      m_Calls: []
+  Streak: {fileID: 0}
   EquippedWeapon: {fileID: 11400000, guid: f16e8bd616b49dc4eaaa3d6a340bca73, type: 2}
 --- !u!4 &1589861253
 Transform:
