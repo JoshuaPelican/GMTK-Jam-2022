@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7185f8e98edc81949943f55bbf05536c, type: 3}
   m_Name: Test Enemy
   m_EditorClassIdentifier: 
-  MaxHealth: 20
+  MaxHealth: 25
   NumberOfAttackDice: 2
-  Difficulty: 2
+  Difficulty: 1
   Mesh: {fileID: 0}
