@@ -14,6 +14,7 @@ public class VariableDisplay : MonoBehaviour
     {
         VariableTextMesh = GetComponent<TextMeshProUGUI>();
         Variable.OnValueChanged.AddListener(OnValueChanged);
+        OnValueChanged(Variable.Value);
     }
 
     void OnValueChanged(float value)

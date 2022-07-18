@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f8f8f9ca63b774abc885f9779e2e5b, type: 3}
-  m_Name: Test Weapon
+  m_Script: {fileID: 11500000, guid: 7185f8e98edc81949943f55bbf05536c, type: 3}
+  m_Name: Chest Monster
   m_EditorClassIdentifier: 
-  NumberOfDice: 1
-  Mesh: {fileID: 0}
+  MaxHealth: 100
+  NumberOfAttackDice: 4
+  Difficulty: 2
+  Mesh: {fileID: 4300000, guid: ca0980e90982fe6468542f951647d58c, type: 3}

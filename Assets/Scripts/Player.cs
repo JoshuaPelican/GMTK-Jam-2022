@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Player : Entity
 {
-    [SerializeField] Weapon EquippedWeapon;
+    public Weapon EquippedWeapon;
     DiceRoller roller;
 
     private void Update()
@@ -17,9 +17,10 @@ public class Player : Entity
         }
     }
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         health.Value = 100;
+        Streak.Value = 1f;
     }
 
     protected override void StartTurn(GameState gameState)
@@ -36,9 +37,14 @@ public class Player : Entity
         if(!target) SetTarget(FindObjectOfType<EnemyBase>());
 
         roller = UseAttack(EquippedWeapon.NumberOfDice);
+    }
+
+    public override void Attack(int value)
+    {
+        base.Attack(value);
 
         // Plays Sword Swing Anim
-        GetComponent<AttackEffects>().isAttacking = true;
+        GetComponentInChildren<AttackEffects>().isAttacking = true;
     }
 
     protected override void Die()

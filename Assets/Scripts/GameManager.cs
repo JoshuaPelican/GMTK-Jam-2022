@@ -6,7 +6,6 @@ public enum GameState
     Player,
     Enemy,
     Map,
-    Event,
     Menu
 }
 
@@ -26,12 +25,25 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] GameObject MapPanel;
+    [SerializeField] Enemy[] enemiesInOrder;
+    int currentEnemy = -1;
 
-    GameState currentGameState;
+    [SerializeField] GameObject MapPanel;
+    [SerializeField] Transform XContainer;
+
+    [SerializeField] GameObject MenuPanel;
+
+    [SerializeField] GameObject AttackButton;
+
+    GameState currentGameState = GameState.Menu;
 
     [HideInInspector]
     public UnityEvent<GameState> OnGameState = new UnityEvent<GameState>();
+
+    public void StartGame()
+    {
+        ChangeGameState(GameState.Map);
+    }
 
     public void ChangeGameState(GameState state)
     {
@@ -42,19 +54,20 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Player:
                 //Popup UI
+                AttackButton.SetActive(true);
                 break;
             case GameState.Enemy:
                 //Let enemy attack
                 break;
             case GameState.Map:
                 //Pullup Map
+                currentEnemy++;
                 Invoke(nameof(OpenMap), 3f);
-                break;
-            case GameState.Event:
-                //Pull up Event
+                Invoke(nameof(CloseMap), 6f);
                 break;
             case GameState.Menu:
                 //Pull up Menu
+                MenuPanel.SetActive(true);
                 break;
         }
     }
@@ -62,5 +75,25 @@ public class GameManager : MonoBehaviour
     void OpenMap()
     {
         MapPanel.SetActive(true);
+        for (int i = 0; i < currentEnemy; i++)
+        {
+            XContainer.GetChild(0).gameObject.SetActive(true);
+        }
+    }
+
+    void CloseMap()
+    {
+        MapPanel.SetActive(false);
+        ChangeGameState(GameState.Player);
+        SpawnEnemy(enemiesInOrder[currentEnemy]);
+    }
+
+    public void SpawnEnemy(Enemy enemy)
+    {
+        EnemyBase enemyBase = GameObject.FindWithTag("EnemyBase").GetComponent<EnemyBase>();
+        enemyBase.Enemy = enemy;
+        enemyBase.Initialize();
+
+        FindObjectOfType<Player>().EquippedWeapon.NumberOfDice++;
     }
 }

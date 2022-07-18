@@ -18,7 +18,7 @@ public abstract class Entity : MonoBehaviour
         Initialize();
     }
 
-    protected abstract void Initialize();
+    public abstract void Initialize();
 
     protected abstract void StartTurn(GameState gameState);
 
@@ -46,7 +46,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    void Attack(int value)
+    public virtual void Attack(int value)
     {
         if (!target)
         {

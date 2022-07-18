@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBase : Entity
 {
-    [SerializeField] Enemy Enemy;
+    public Enemy Enemy;
     DiceRoller roller;
 
     [SerializeField] float RollFrequency = 0.01f;
@@ -17,14 +17,21 @@ public class EnemyBase : Entity
         Streak.Value = 1;
     }
 
-    protected override void Initialize()
+    public override void Initialize()
     {
+        if (!Enemy)
+            return;
+
         health.Value = Enemy.MaxHealth;
+        GetComponentInChildren<MeshFilter>().mesh = Enemy.Mesh;
     }
 
     protected override void StartTurn(GameState gameState)
     {
         if (gameState != GameState.Enemy)
+            return;
+
+        if (health.Value <= 0)
             return;
 
         roller = UseAttack(Enemy.NumberOfAttackDice);
@@ -79,7 +86,7 @@ public class EnemyBase : Entity
     protected override void Die()
     {
         Debug.Log("Enemy " + name + " has Died!");
-        Destroy(gameObject);
+        GetComponentInChildren<MeshFilter>().mesh = null;
         GameManager.Instance.ChangeGameState(GameState.Map);
     }
 

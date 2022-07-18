@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f8f8f9ca63b774abc885f9779e2e5b, type: 3}
-  m_Name: Test Weapon
+  m_Script: {fileID: 11500000, guid: 7185f8e98edc81949943f55bbf05536c, type: 3}
+  m_Name: Beholder
   m_EditorClassIdentifier: 
-  NumberOfDice: 1
-  Mesh: {fileID: 0}
+  MaxHealth: 60
+  NumberOfAttackDice: 2
+  Difficulty: 1
+  Mesh: {fileID: 4300000, guid: 902eedcaf6164ab4aa84bee782b015a5, type: 3}

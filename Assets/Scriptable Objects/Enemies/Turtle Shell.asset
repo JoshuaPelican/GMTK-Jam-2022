@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7185f8e98edc81949943f55bbf05536c, type: 3}
-  m_Name: Test Enemy
+  m_Name: Turtle Shell
   m_EditorClassIdentifier: 
-  MaxHealth: 25
-  NumberOfAttackDice: 2
+  MaxHealth: 80
+  NumberOfAttackDice: 3
   Difficulty: 1
-  Mesh: {fileID: 0}
+  Mesh: {fileID: 4300000, guid: 56dd4edec19a3b04195448769c085dfc, type: 3}
